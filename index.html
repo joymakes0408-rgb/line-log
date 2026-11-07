@@ -1,0 +1,35 @@
+<!doctype html>
+<!--
+  LINEログ を画面いっぱいに表示するだけのページ（GitHub Pages に置く）
+  ・アプリ（Apps Script のウェブアプリ）を、画面ぴったりの枠の中に出す。枠が画面と同じ大きさなので、下の帯や上の見出しが固定される
+  ・このページのURLの後ろについているもの（個人リンクの ?k=合言葉 など）は、そのままアプリに渡す
+  ・このページは、アプリの中身やデータを持っていない（見られる人は、今までどおりアプリの個人リンクと Google のログインで決まる）
+-->
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- スマホの「ホーム画面に追加」で、アプリのように開けるようにする -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="LINEログ">
+<meta name="theme-color" content="#ffffff">
+<title>LINEログ</title>
+<style>
+  :root { --bg: #f5f6f8; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #121417; } }
+  html, body { margin: 0; height: 100%; background: var(--bg); }
+  /* 枠を画面ぴったりにする（100dvh：スマホのアドレスバーの出し入れにも合わせる） */
+  iframe { position: fixed; top: 0; left: 0; width: 100%; height: 100%; height: 100dvh; border: 0; }
+</style>
+</head>
+<body>
+<iframe id="app" title="LINEログ"></iframe>
+<script>
+  // ↓ここに、アプリのURL（Apps Script の「デプロイを管理」に出ている、/exec で終わるもの）を入れる
+  var APP_URL = 'https://script.google.com/macros/s/ここにアプリのIDを入れる/exec';
+  // 個人リンクの合言葉（?k=…）など、このページのURLの後ろについているものを、そのままアプリに渡す
+  document.getElementById('app').src = APP_URL + location.search;
+</script>
+</body>
+</html>
